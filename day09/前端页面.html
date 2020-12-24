@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .btn {
+      float: left;
+      margin-left: 20px;
+      margin-top: 10px;
+      width: 88px;
+      height: 55px;
+    }
+
+    .show {
+      float: left;
+      margin-left: 120px;
+      margin-top: 10px;
+      width: 120px;
+      height: 60px;
+      background-color: skyblue;
+      text-align: center;
+      line-height: 60px;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="btn">登陆名</button>
+  <div class="show"></div>
+
+  <script>
+    const btn = document.querySelector('.btn')
+    const show = document.querySelector('.show')
+
+    btn.addEventListener('click', function () {
+      //创建对象
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:8000/login');
+      xhr.send('name=cxx&age=21');
+      xhr.onreadystatechange = function () {
+        //
+        if (xhr.readyState === 4) {
+          if (xhr.status >= 200 && xhr.status <= 300) {
+            //处理服务端
+            show.innerHTML = xhr.response;
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

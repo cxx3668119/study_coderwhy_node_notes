@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .btn {
+      float: left;
+      margin-top: 65px;
+      margin-left: 20px;
+      width: 88px;
+      height: 55px;
+    }
+
+    .show {
+      float: left;
+      margin-left: 120px;
+      margin-top: 65px;
+      width: 120px;
+      height: 60px;
+      background-color: skyblue;
+      text-align: center;
+      line-height: 60px;
+    }
+  </style>
+  <script src="../day09/jquery-1.11.1.min.js"></script>
+</head>
+
+<body>
+  <button class="btn1 btn">GET</button>
+  <button class="btn2 btn">POST</button>
+  <button class="btn3 btn">Ajax</button>
+  <div class="show"></div>
+  <script>
+    // const btn = document.querySelector('.btn')
+    // const show = document.querySelector('.show')
+
+    // btn.addEventListener('click', function () {
+    //   //创建对象
+    //   const xhr = new XMLHttpRequest();
+    //   xhr.open('POST', 'http://localhost:8000/login');
+    //   xhr.send('name=cxx&age=21');
+    //   xhr.onreadystatechange = function () {
+    //     //
+    //     if (xhr.readyState === 4) {
+    //       if (xhr.status >= 200 && xhr.status <= 300) {
+    //         //处理服务端
+    //         show.innerHTML = xhr.response;
+    //       }
+    //     }
+    //   }
+    // })
+    $('.btn1').click(function () {
+      $.get('http://localhost:8000/login', {
+        a: 100,
+        b: 200
+      }, function (data) {
+        console.log(data);
+        $('.show').text(data.name + ':' + data.method)
+      })
+    })
+
+    $('.btn2').click(function () {
+      $.post('http://localhost:8000/login', {
+        a: 100,
+        b: 200
+      }, function (e) {
+        console.log(e);
+        $('.show').text(e.name + ':' + e.method)
+      })
+    })
+
+    $('.btn3').click(function () {
+      $.ajax({
+        url: 'http://localhost:8000/login',
+        data: {
+          a: 100,
+          b: 200
+        },
+        type: 'GET',
+        dataType: 'json',
+        success: function (e) {
+          $('.show').text(e.name + ':' + e.method)
+          console.log(e);
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>
