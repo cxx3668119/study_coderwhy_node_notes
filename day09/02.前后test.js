@@ -18,7 +18,7 @@ cxx.post('/login', (req, res, next) => {
   req.setEncoding('utf-8')
   // req.on('data', (data) => {
   // const result = JSON.parse(data.toString())
-  // req.body = result
+  // req.body = result   
   // console.log(data);
   // })
   //允许跨域
